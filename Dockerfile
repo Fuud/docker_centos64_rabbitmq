@@ -14,6 +14,8 @@ RUN \
 # Define working directory.
 WORKDIR /data
 
+CMD /etc/init.d/rabbitmq-server start && sleep infinity
+
 # Expose ports.
 EXPOSE 5672
 EXPOSE 15672
