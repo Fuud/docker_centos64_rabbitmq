@@ -14,7 +14,7 @@ RUN \
 # Define working directory.
 WORKDIR /data
 
-CMD /etc/init.d/rabbitmq-server start && sleep infinity
+CMD /etc/init.d/rabbitmq-server start && sleep `if [[ -z "$auto_exit_timeout" ]]; then echo infinity ; else echo $auto_exit_timeout ; fi`
 
 # Expose ports.
 EXPOSE 5672
