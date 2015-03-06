@@ -25,6 +25,10 @@ RUN \
         rabbitmq-plugins enable rabbitmq_management && \
         chkconfig rabbitmq-server on
 
+# Install port forwarding tool
+RUN \
+        yum -y install socat
+
 # Add start scripts
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
