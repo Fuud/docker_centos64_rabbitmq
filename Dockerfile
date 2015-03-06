@@ -1,4 +1,19 @@
-FROM tutum/centos:6.4
+FROM centos:6
+
+# Install sshd.
+RUN yum -y install openssh-server
+
+# Install ssh
+RUN yum -y install openssh-server
+
+# Set root password to "test_password"
+RUN echo "root:test_password" | chpasswd
+
+# Generate ssh keys
+RUN rm -f /etc/ssh/ssh_host_dsa_key /etc/ssh/ssh_host_rsa_key && \
+        ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key && \
+        ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
+
 
 # Install RabbitMQ.
 RUN \
@@ -10,12 +25,16 @@ RUN \
         rabbitmq-plugins enable rabbitmq_management && \
         chkconfig rabbitmq-server on
 
+# Add start scripts
+ADD run.sh /run.sh
+RUN chmod +x /run.sh
 
 # Define working directory.
 WORKDIR /data
 
-CMD /etc/init.d/rabbitmq-server start && sleep `if [[ -z "$auto_exit_timeout" ]]; then echo infinity ; else echo $auto_exit_timeout ; fi`
-
 # Expose ports.
+EXPOSE 22
 EXPOSE 5672
 EXPOSE 15672
+
+CMD ["/run.sh"]
