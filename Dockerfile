@@ -33,6 +33,9 @@ RUN \
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
 
+ADD start_tunnel.sh /start_tunnel.sh
+RUN chmod +x /start_tunnel.sh
+
 # Define working directory.
 WORKDIR /data
 
