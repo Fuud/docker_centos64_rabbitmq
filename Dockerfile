@@ -39,7 +39,8 @@ WORKDIR /data
 # Expose ports.
 EXPOSE 22
 EXPOSE 5672
-EXPOSE 5673 # we will tunnel 5672 to 5673 using socat
+# we will tunnel 5672 to 5673 using socat
+EXPOSE 5673
 EXPOSE 15672
 
 CMD ["/run.sh"]
