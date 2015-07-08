@@ -36,6 +36,9 @@ RUN chmod +x /run.sh
 ADD start_tunnel.sh /start_tunnel.sh
 RUN chmod +x /start_tunnel.sh
 
+# Remember revision 
+ADD .git/HEAD /git-revision
+
 # Define working directory.
 WORKDIR /data
 
