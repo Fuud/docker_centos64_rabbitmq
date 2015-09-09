@@ -3,6 +3,9 @@ FROM centos:6
 # Install sshd.
 RUN yum -y install openssh-server
 
+# Disable PAM for sshd
+RUN sed -i 's|UsePAM yes|UsePAM no|g' /etc/ssh/sshd_config
+
 # Install ssh
 RUN yum -y install openssh-clients
 
