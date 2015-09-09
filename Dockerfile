@@ -4,7 +4,7 @@ FROM centos:6
 RUN yum -y install openssh-server
 
 # Install ssh
-RUN yum -y install openssh-server
+RUN yum -y install openssh-clients
 
 # Set root password to "test_password"
 RUN echo "root:test_password" | chpasswd
